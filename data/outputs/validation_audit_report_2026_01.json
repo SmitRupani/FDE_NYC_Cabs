@@ -1,0 +1,24 @@
+{
+  "total_records": 3724889,
+  "clean_records": 3463451,
+  "clean_rate_pct": 92.98,
+  "quarantined_records": 261438,
+  "quarantine_rate_pct": 7.02,
+  "violations_by_rule": {
+    "out_of_period": 7,
+    "negative_duration": 1,
+    "duration_under_1min": 83747,
+    "duration_over_24h": 35,
+    "distance_under_0_05mi": 153532,
+    "distance_over_150mi": 120,
+    "speed_over_85mph": 447,
+    "non_positive_fare_or_total": 40435,
+    "fare_over_1500": 2,
+    "unknown_or_unmapped_zone": 25251
+  },
+  "fde_assumptions_and_policy": {
+    "passenger_count_nulls": "Preserved in clean dataset for operational and revenue KPIs; excluded only for per-passenger metrics. Dropping 29.2% of nulls would severely bias trip volume.",
+    "ratecode_id_nulls": "Mapped to 'Unassigned / Digital Dispatch' rather than dropping.",
+    "quarantine_policy": "Records failing physical travel laws (speed > 85mph, negative fares, duration < 1m) are segregated to quarantine parquet with diagnostic tags for vendor SLA reviews."
+  }
+}
