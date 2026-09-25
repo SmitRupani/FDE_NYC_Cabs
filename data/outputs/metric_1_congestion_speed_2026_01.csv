@@ -1,0 +1,24 @@
+pickup_borough,time_window,trip_count,avg_duration_min,avg_distance_miles,median_speed_mph,p10_speed_mph,p90_speed_mph
+Bronx,Morning Rush (07-10),10452,43.4,7.64,10.83,6.0,20.66
+Bronx,Midday (10-16),9803,43.0,8.13,11.08,5.68,20.67
+Bronx,Evening Rush (16-20),3920,41.2,8.19,11.41,5.76,20.67
+Bronx,Night / Off-Peak,10676,31.9,7.62,15.63,8.58,28.13
+Brooklyn,Morning Rush (07-10),26960,37.7,6.02,9.54,5.43,17.86
+Brooklyn,Midday (10-16),39441,34.5,5.78,9.3,5.12,17.15
+Brooklyn,Evening Rush (16-20),20291,31.4,5.41,9.63,5.4,17.04
+Brooklyn,Night / Off-Peak,57370,24.5,5.88,13.31,8.53,23.95
+EWR,Midday (10-16),5,22.6,8.18,22.91,10.87,26.81
+EWR,Evening Rush (16-20),6,18.7,6.91,15.74,5.33,29.5
+EWR,Night / Off-Peak,8,21.5,10.55,26.01,14.92,36.02
+Manhattan,Morning Rush (07-10),328836,14.7,2.63,9.33,5.28,17.1
+Manhattan,Midday (10-16),956743,15.9,2.4,8.02,4.41,14.01
+Manhattan,Evening Rush (16-20),741512,15.3,2.23,8.11,4.7,13.11
+Manhattan,Night / Off-Peak,950335,13.8,2.84,10.72,6.57,18.55
+Queens,Morning Rush (07-10),35317,37.4,9.57,15.0,7.89,30.94
+Queens,Midday (10-16),87737,36.8,10.94,18.31,9.64,28.52
+Queens,Evening Rush (16-20),70059,37.1,12.04,20.12,10.97,29.05
+Queens,Night / Off-Peak,113538,26.0,10.73,26.02,12.36,36.94
+Staten Island,Morning Rush (07-10),178,32.8,7.92,13.18,9.21,22.26
+Staten Island,Midday (10-16),83,33.7,8.02,18.38,4.87,31.47
+Staten Island,Evening Rush (16-20),32,20.7,8.24,24.09,14.45,31.33
+Staten Island,Night / Off-Peak,149,26.7,10.59,23.06,14.2,31.85

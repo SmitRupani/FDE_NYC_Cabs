@@ -1,0 +1,206 @@
+location_id,borough,zone_name,total_pickups,total_dropoffs,net_passenger_flow,flow_ratio,operational_status
+132,Queens,JFK Airport,132855,20989,111866,6.33,Critical Deficit (Demand Source)
+138,Queens,LaGuardia Airport,79645,24625,55020,3.234,Critical Deficit (Demand Source)
+186,Manhattan,Penn Station/Madison Sq West,104742,67084,37658,1.561,Critical Deficit (Demand Source)
+161,Manhattan,Midtown Center,138039,114615,23424,1.204,Critical Deficit (Demand Source)
+162,Manhattan,Midtown East,102904,84544,18360,1.217,Critical Deficit (Demand Source)
+249,Manhattan,West Village,75417,60356,15061,1.25,Critical Deficit (Demand Source)
+75,Manhattan,East Harlem South,28661,43039,-14378,0.666,Critical Surplus (Fleet Sink)
+114,Manhattan,Greenwich Village South,49979,35651,14328,1.402,Critical Deficit (Demand Source)
+79,Manhattan,East Village,95439,82749,12690,1.153,Critical Deficit (Demand Source)
+237,Manhattan,Upper East Side South,151517,138937,12580,1.091,Critical Deficit (Demand Source)
+233,Manhattan,UN/Turtle Bay South,36368,48739,-12371,0.746,Critical Surplus (Fleet Sink)
+142,Manhattan,Lincoln Square East,103928,91715,12213,1.133,Critical Deficit (Demand Source)
+50,Manhattan,Clinton West,22990,34780,-11790,0.661,Critical Surplus (Fleet Sink)
+43,Manhattan,Central Park,40927,30088,10839,1.36,Critical Deficit (Demand Source)
+74,Manhattan,East Harlem North,14985,25730,-10745,0.582,Critical Surplus (Fleet Sink)
+229,Manhattan,Sutton Place/Turtle Bay North,57002,67454,-10452,0.845,Critical Surplus (Fleet Sink)
+143,Manhattan,Lincoln Square West,41578,51642,-10064,0.805,Critical Surplus (Fleet Sink)
+234,Manhattan,Union Sq,89134,79478,9656,1.121,Critical Deficit (Demand Source)
+231,Manhattan,TriBeCa/Civic Center,45934,54992,-9058,0.835,Critical Surplus (Fleet Sink)
+141,Manhattan,Lenox Hill West,82122,90972,-8850,0.903,Critical Surplus (Fleet Sink)
+87,Manhattan,Financial District North,22718,31312,-8594,0.726,Critical Surplus (Fleet Sink)
+232,Manhattan,Two Bridges/Seward Park,11141,19691,-8550,0.566,Critical Surplus (Fleet Sink)
+244,Manhattan,Washington Heights South,8967,17350,-8383,0.517,Critical Surplus (Fleet Sink)
+238,Manhattan,Upper West Side North,67489,75635,-8146,0.892,Critical Surplus (Fleet Sink)
+230,Manhattan,Times Sq/Theatre District,99833,91856,7977,1.087,Critical Deficit (Demand Source)
+163,Manhattan,Midtown North,80987,73160,7827,1.107,Critical Deficit (Demand Source)
+170,Manhattan,Murray Hill,86940,94061,-7121,0.924,Critical Surplus (Fleet Sink)
+41,Manhattan,Central Harlem,16685,23622,-6937,0.706,Critical Surplus (Fleet Sink)
+137,Manhattan,Kips Bay,45046,51874,-6828,0.868,Critical Surplus (Fleet Sink)
+224,Manhattan,Stuy Town/Peter Cooper Village,8938,15655,-6717,0.571,Critical Surplus (Fleet Sink)
+42,Manhattan,Central Harlem North,12868,19159,-6291,0.672,Critical Surplus (Fleet Sink)
+243,Manhattan,Washington Heights North,4056,10128,-6072,0.4,Critical Surplus (Fleet Sink)
+246,Manhattan,West Chelsea/Hudson Yards,59134,65176,-6042,0.907,Critical Surplus (Fleet Sink)
+166,Manhattan,Morningside Heights,19137,25074,-5937,0.763,Critical Surplus (Fleet Sink)
+181,Brooklyn,Park Slope,4350,10077,-5727,0.432,Critical Surplus (Fleet Sink)
+1,EWR,Newark Airport,19,5201,-5182,0.004,Critical Surplus (Fleet Sink)
+70,Queens,East Elmhurst,6660,1493,5167,4.461,Critical Deficit (Demand Source)
+112,Brooklyn,Greenpoint,5632,10638,-5006,0.529,Critical Surplus (Fleet Sink)
+263,Manhattan,Yorkville West,69433,74278,-4845,0.935,Balanced Flow
+33,Brooklyn,Brooklyn Heights,4522,9255,-4733,0.489,Balanced Flow
+236,Manhattan,Upper East Side North,144532,148826,-4294,0.971,Balanced Flow
+13,Manhattan,Battery Park City,20119,24192,-4073,0.832,Balanced Flow
+100,Manhattan,Garment District,43185,39130,4055,1.104,Balanced Flow
+113,Manhattan,Greenwich Village North,46788,42740,4048,1.095,Balanced Flow
+262,Manhattan,Yorkville East,51210,55234,-4024,0.927,Balanced Flow
+88,Manhattan,Financial District South,11319,15183,-3864,0.746,Balanced Flow
+4,Manhattan,Alphabet City,15368,19215,-3847,0.8,Balanced Flow
+116,Manhattan,Hamilton Heights,7982,11801,-3819,0.676,Balanced Flow
+95,Queens,Forest Hills,2296,5974,-3678,0.384,Balanced Flow
+93,Queens,Flushing Meadows-Corona Park,373,3862,-3489,0.097,Balanced Flow
+148,Manhattan,Lower East Side,44563,41187,3376,1.082,Balanced Flow
+61,Brooklyn,Crown Heights North,6619,9930,-3311,0.667,Balanced Flow
+45,Manhattan,Chinatown,7985,11053,-3068,0.722,Balanced Flow
+145,Queens,Long Island City/Hunters Point,6635,9648,-3013,0.688,Balanced Flow
+144,Manhattan,Little Italy/NoLiTa,36887,33924,2963,1.087,Balanced Flow
+127,Manhattan,Inwood,1865,4814,-2949,0.387,Balanced Flow
+256,Brooklyn,Williamsburg (South Side),6529,9414,-2885,0.694,Balanced Flow
+49,Brooklyn,Clinton Hill,3569,6250,-2681,0.571,Balanced Flow
+223,Queens,Steinway,3012,5671,-2659,0.531,Balanced Flow
+37,Brooklyn,Bushwick South,6609,9234,-2625,0.716,Balanced Flow
+209,Manhattan,Seaport,6920,9542,-2622,0.725,Balanced Flow
+17,Brooklyn,Bedford,3795,6398,-2603,0.593,Balanced Flow
+25,Brooklyn,Boerum Hill,4008,6609,-2601,0.606,Balanced Flow
+198,Queens,Ridgewood,1964,4479,-2515,0.438,Balanced Flow
+140,Manhattan,Lenox Hill East,72138,74506,-2368,0.968,Balanced Flow
+7,Queens,Astoria,9190,11424,-2234,0.804,Balanced Flow
+48,Manhattan,Clinton East,77745,75604,2141,1.028,Balanced Flow
+82,Queens,Elmhurst,2619,4750,-2131,0.551,Balanced Flow
+90,Manhattan,Flatiron,51520,49443,2077,1.042,Balanced Flow
+225,Brooklyn,Stuyvesant Heights,4433,6485,-2052,0.684,Balanced Flow
+216,Queens,South Ozone Park,2580,4618,-2038,0.559,Balanced Flow
+36,Brooklyn,Bushwick North,4128,6148,-2020,0.671,Balanced Flow
+14,Brooklyn,Bay Ridge,1836,3831,-1995,0.479,Balanced Flow
+255,Brooklyn,Williamsburg (North Side),8628,10585,-1957,0.815,Balanced Flow
+152,Manhattan,Manhattanville,4511,6389,-1878,0.706,Balanced Flow
+92,Queens,Flushing,1207,3059,-1852,0.395,Balanced Flow
+189,Brooklyn,Prospect Heights,1794,3603,-1809,0.498,Balanced Flow
+211,Manhattan,SoHo,26112,27910,-1798,0.936,Balanced Flow
+65,Brooklyn,Downtown Brooklyn/MetroTech,3993,5791,-1798,0.69,Balanced Flow
+125,Manhattan,Hudson Sq,15966,17746,-1780,0.9,Balanced Flow
+188,Brooklyn,Prospect-Lefferts Gardens,3991,5709,-1718,0.699,Balanced Flow
+158,Manhattan,Meatpacking/West Village West,30911,32628,-1717,0.947,Balanced Flow
+89,Brooklyn,Flatbush/Ditmas Park,3941,5614,-1673,0.702,Balanced Flow
+10,Queens,Baisley Park,1826,3484,-1658,0.524,Balanced Flow
+40,Brooklyn,Carroll Gardens,1508,3051,-1543,0.494,Balanced Flow
+66,Brooklyn,DUMBO/Vinegar Hill,4017,5546,-1529,0.724,Balanced Flow
+56,Queens,Corona,1109,2636,-1527,0.421,Balanced Flow
+80,Brooklyn,East Williamsburg,5559,7071,-1512,0.786,Balanced Flow
+151,Manhattan,Manhattan Valley,29030,30505,-1475,0.952,Balanced Flow
+129,Queens,Jackson Heights,4327,5765,-1438,0.751,Balanced Flow
+228,Brooklyn,Sunset Park West,1822,3260,-1438,0.559,Balanced Flow
+97,Brooklyn,Fort Greene,5089,6489,-1400,0.784,Balanced Flow
+24,Manhattan,Bloomingdale,10593,11876,-1283,0.892,Balanced Flow
+220,Bronx,Spuyten Duyvil/Kingsbridge,871,2069,-1198,0.421,Balanced Flow
+261,Manhattan,World Trade Center,14031,15228,-1197,0.921,Balanced Flow
+202,Manhattan,Roosevelt Island,631,1822,-1191,0.346,Balanced Flow
+52,Brooklyn,Cobble Hill,1372,2508,-1136,0.547,Balanced Flow
+157,Queens,Maspeth,1074,2197,-1123,0.489,Balanced Flow
+164,Manhattan,Midtown South,65285,64169,1116,1.017,Balanced Flow
+28,Queens,Briarwood/Jamaica Hills,1211,2324,-1113,0.521,Balanced Flow
+196,Queens,Rego Park,1011,2123,-1112,0.476,Balanced Flow
+200,Bronx,Riverdale/North Riverdale/Fieldston,465,1549,-1084,0.3,Balanced Flow
+179,Queens,Old Astoria,3542,4602,-1060,0.77,Balanced Flow
+257,Brooklyn,Windsor Terrace,649,1704,-1055,0.381,Balanced Flow
+219,Queens,Springfield Gardens South,878,1883,-1005,0.466,Balanced Flow
+160,Queens,Middle Village,652,1635,-983,0.399,Balanced Flow
+76,Brooklyn,East New York,5309,6269,-960,0.847,Balanced Flow
+217,Brooklyn,South Williamsburg,730,1689,-959,0.432,Balanced Flow
+26,Brooklyn,Borough Park,1217,2135,-918,0.57,Balanced Flow
+62,Brooklyn,Crown Heights South,2015,2915,-900,0.691,Balanced Flow
+39,Brooklyn,Canarsie,3186,4064,-878,0.784,Balanced Flow
+135,Queens,Kew Gardens Hills,617,1486,-869,0.415,Balanced Flow
+155,Brooklyn,Marine Park/Mill Basin,1023,1877,-854,0.545,Balanced Flow
+134,Queens,Kew Gardens,880,1727,-847,0.51,Balanced Flow
+168,Bronx,Mott Haven/Port Morris,2575,3408,-833,0.756,Balanced Flow
+205,Queens,Saint Albans,1394,2205,-811,0.632,Balanced Flow
+107,Manhattan,Gramercy,67181,66388,793,1.012,Balanced Flow
+165,Brooklyn,Midwood,1095,1846,-751,0.593,Balanced Flow
+174,Bronx,Norwood,857,1605,-748,0.534,Balanced Flow
+69,Bronx,East Concourse/Concourse Village,1740,2487,-747,0.7,Balanced Flow
+195,Brooklyn,Red Hook,1206,1930,-724,0.625,Balanced Flow
+130,Queens,Jamaica,3891,4612,-721,0.844,Balanced Flow
+258,Queens,Woodhaven,1144,1858,-714,0.616,Balanced Flow
+226,Queens,Sunnyside,6884,7585,-701,0.908,Balanced Flow
+260,Queens,Woodside,2677,3332,-655,0.803,Balanced Flow
+124,Queens,Howard Beach,603,1254,-651,0.481,Balanced Flow
+121,Queens,Hillcrest/Pomonok,776,1408,-632,0.551,Balanced Flow
+22,Brooklyn,Bensonhurst West,817,1447,-630,0.565,Balanced Flow
+106,Brooklyn,Gowanus,1093,1714,-621,0.638,Balanced Flow
+12,Manhattan,Battery Park,621,1242,-621,0.5,Balanced Flow
+102,Queens,Glendale,646,1266,-620,0.51,Balanced Flow
+185,Bronx,Pelham Parkway,672,1283,-611,0.524,Balanced Flow
+173,Queens,North Corona,644,1252,-608,0.514,Balanced Flow
+123,Brooklyn,Homecrest,786,1393,-607,0.564,Balanced Flow
+252,Queens,Whitestone,313,917,-604,0.341,Balanced Flow
+20,Bronx,Belmont,476,1070,-594,0.445,Balanced Flow
+16,Queens,Bayside,322,915,-593,0.352,Balanced Flow
+38,Queens,Cambria Heights,382,972,-590,0.393,Balanced Flow
+218,Queens,Springfield Gardens North,1066,1653,-587,0.645,Balanced Flow
+139,Queens,Laurelton,564,1145,-581,0.493,Balanced Flow
+242,Bronx,Van Nest/Morris Park,777,1344,-567,0.578,Balanced Flow
+169,Bronx,Mount Hope,997,1563,-566,0.638,Balanced Flow
+227,Brooklyn,Sunset Park East,806,1370,-564,0.588,Balanced Flow
+86,Queens,Far Rockaway,1071,1634,-563,0.655,Balanced Flow
+203,Queens,Rosedale,485,1033,-548,0.47,Balanced Flow
+18,Bronx,Bedford Park,995,1540,-545,0.646,Balanced Flow
+191,Queens,Queens Village,1079,1624,-545,0.664,Balanced Flow
+247,Bronx,West Concourse,1470,2002,-532,0.734,Balanced Flow
+241,Bronx,Van Cortlandt Village,949,1469,-520,0.646,Balanced Flow
+53,Queens,College Point,333,849,-516,0.392,Balanced Flow
+171,Queens,Murray Hill-Queens,353,855,-502,0.413,Balanced Flow
+131,Queens,Jamaica Estates,704,1202,-498,0.586,Balanced Flow
+149,Brooklyn,Madison,574,1049,-475,0.547,Balanced Flow
+29,Brooklyn,Brighton Beach,625,1090,-465,0.573,Balanced Flow
+208,Bronx,Schuylerville/Edgewater Park,650,1112,-462,0.585,Balanced Flow
+83,Queens,Elmhurst/Maspeth,1025,1474,-449,0.695,Balanced Flow
+215,Queens,South Jamaica,1471,1911,-440,0.77,Balanced Flow
+133,Brooklyn,Kensington,990,1421,-431,0.697,Balanced Flow
+67,Brooklyn,Dyker Heights,459,884,-425,0.519,Balanced Flow
+54,Brooklyn,Columbia Street,405,829,-424,0.489,Balanced Flow
+197,Queens,Richmond Hill,2293,2716,-423,0.844,Balanced Flow
+78,Bronx,East Tremont,1081,1501,-420,0.72,Balanced Flow
+235,Bronx,University Heights/Morris Heights,1267,1682,-415,0.753,Balanced Flow
+21,Brooklyn,Bensonhurst East,627,1037,-410,0.605,Balanced Flow
+159,Bronx,Melrose South,1521,1929,-408,0.788,Balanced Flow
+210,Brooklyn,Sheepshead Bay,1023,1421,-398,0.72,Balanced Flow
+213,Bronx,Soundview/Castle Hill,1499,1880,-381,0.797,Balanced Flow
+180,Queens,Ozone Park,556,925,-369,0.601,Balanced Flow
+136,Bronx,Kingsbridge Heights,658,1025,-367,0.642,Balanced Flow
+126,Bronx,Hunts Point,725,1083,-358,0.669,Balanced Flow
+254,Bronx,Williamsbridge/Olinville,1379,1722,-343,0.801,Balanced Flow
+55,Brooklyn,Coney Island,1529,1869,-340,0.818,Balanced Flow
+91,Brooklyn,Flatlands,2297,2633,-336,0.872,Balanced Flow
+119,Bronx,Highbridge,970,1303,-333,0.744,Balanced Flow
+259,Bronx,Woodlawn/Wakefield,764,1091,-327,0.7,Balanced Flow
+71,Brooklyn,East Flatbush/Farragut,2142,2467,-325,0.868,Balanced Flow
+239,Manhattan,Upper West Side South,91643,91959,-316,0.997,Balanced Flow
+35,Brooklyn,Brownsville,2724,3028,-304,0.9,Balanced Flow
+146,Queens,Long Island City/Queens Plaza,3595,3294,301,1.091,Balanced Flow
+3,Bronx,Allerton/Pelham Gardens,467,765,-298,0.61,Balanced Flow
+19,Queens,Bellerose,394,691,-297,0.57,Balanced Flow
+51,Bronx,Co-Op City,1429,1723,-294,0.829,Balanced Flow
+63,Brooklyn,Cypress Hills,1472,1761,-289,0.836,Balanced Flow
+85,Brooklyn,Erasmus,1548,1828,-280,0.847,Balanced Flow
+193,Queens,Queensbridge/Ravenswood,1962,2219,-257,0.884,Balanced Flow
+94,Bronx,Fordham South,453,707,-254,0.641,Balanced Flow
+147,Bronx,Longwood,571,825,-254,0.692,Balanced Flow
+77,Brooklyn,East New York/Pennsylvania Avenue,1362,1602,-240,0.85,Balanced Flow
+47,Bronx,Claremont/Bathgate,812,1052,-240,0.772,Balanced Flow
+177,Brooklyn,Ocean Hill,2641,2878,-237,0.918,Balanced Flow
+32,Bronx,Bronxdale,661,857,-196,0.771,Balanced Flow
+222,Brooklyn,Starrett City,1053,1246,-193,0.845,Balanced Flow
+167,Bronx,Morrisania/Melrose,1215,1405,-190,0.865,Balanced Flow
+81,Bronx,Eastchester,706,845,-139,0.836,Balanced Flow
+68,Manhattan,East Chelsea,85153,85017,136,1.002,Balanced Flow
+108,Brooklyn,Gravesend,521,656,-135,0.794,Balanced Flow
+72,Brooklyn,East Flatbush/Remsen Village,2572,2701,-129,0.952,Balanced Flow
+122,Queens,Hollis,480,609,-129,0.788,Balanced Flow
+250,Bronx,Westchester Village/Unionport,840,965,-125,0.87,Balanced Flow
+34,Brooklyn,Brooklyn Navy Yard,557,678,-121,0.822,Balanced Flow
+117,Queens,Hammels/Arverne,1127,1196,-69,0.942,Balanced Flow
+60,Bronx,Crotona Park East,698,741,-43,0.942,Balanced Flow
+248,Bronx,West Farms/Bronx River,821,830,-9,0.989,Balanced Flow
+182,Bronx,Parkchester,1340,1348,-8,0.994,Balanced Flow
+212,Bronx,Soundview/Bruckner,827,826,1,1.001,Balanced Flow

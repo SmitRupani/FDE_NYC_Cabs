@@ -1,0 +1,5 @@
+vendor_name,total_records_received,passed_records,quarantined_records,trust_score_pct,quarantine_rate_pct,zero_dist_count,non_positive_fare_count,short_duration_count,implausible_speed_count
+VeriFone Inc. (VTS),2965742,2767883.0,197859.0,93.33,6.67,142691.0,40062.0,32156.0,131.0
+Creative Mobile Technologies (CMT),710425,691612.0,18813.0,97.35,2.65,9953.0,335.0,6875.0,314.0
+Pilot Provider Beta,44705,0.0,44705.0,0.0,100.0,888.0,0.0,44705.0,0.0
+Pilot Provider Alpha,4017,3956.0,61.0,98.48,1.52,0.0,38.0,11.0,2.0

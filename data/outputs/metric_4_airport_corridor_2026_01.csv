@@ -1,0 +1,5 @@
+airport_corridor,total_trips,pct_of_all_trips,avg_distance_miles,avg_duration_min,median_speed_mph,avg_total_fare,total_revenue,avg_airport_fee,avg_tolls,avg_revenue_per_min
+Citywide Non-Airport,3205505,92.55,2.69,16.0,9.07,25.49,81696364.22,0.0,0.19,2.02
+JFK International Airport,151614,4.38,15.2,40.0,24.3,78.89,11961132.66,1.49,3.39,2.28
+LaGuardia Airport (LGA),101301,2.92,9.55,28.8,21.63,68.68,6957084.54,1.35,4.99,2.74
+Newark Airport (EWR),5031,0.15,17.5,38.8,29.7,132.1,664609.81,0.0,18.86,3.76
