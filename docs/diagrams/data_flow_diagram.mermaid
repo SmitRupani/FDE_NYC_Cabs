@@ -1,0 +1,57 @@
+erDiagram
+    dim_zones ||--o{ fct_trips : "pickup_location_id"
+    dim_zones ||--o{ fct_trips : "dropoff_location_id"
+    dim_vendors ||--o{ fct_trips : "vendor_id"
+    dim_rate_codes ||--o{ fct_trips : "rate_code_id"
+    dim_payment_types ||--o{ fct_trips : "payment_type_id"
+
+    dim_zones {
+        integer location_id PK
+        string borough
+        string zone_name
+        string service_zone
+        boolean is_manhattan_cbd
+        boolean is_airport_zone
+    }
+
+    dim_vendors {
+        integer vendor_id PK
+        string vendor_name
+    }
+
+    dim_rate_codes {
+        integer rate_code_id PK
+        string rate_description
+    }
+
+    dim_payment_types {
+        integer payment_type_id PK
+        string payment_description
+        boolean is_electronic_tip_recorded
+    }
+
+    fct_trips {
+        bigint trip_id PK
+        integer vendor_id FK
+        integer rate_code_id FK
+        integer payment_type_id FK
+        integer pickup_location_id FK
+        integer dropoff_location_id FK
+        timestamp pickup_datetime
+        timestamp dropoff_datetime
+        integer pickup_hour
+        string time_window
+        double duration_minutes
+        double trip_distance_miles
+        double effective_speed_mph
+        double fare_amount
+        double tip_amount
+        double tolls_amount
+        double congestion_surcharge
+        double airport_fee
+        double total_amount
+        double revenue_per_minute
+        boolean is_intra_borough
+        boolean is_airport_trip
+        boolean is_cbd_involved
+    }

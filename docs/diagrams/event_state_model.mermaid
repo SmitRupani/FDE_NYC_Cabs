@@ -1,0 +1,43 @@
+stateDiagram-v2
+    [*] --> Cruising_Idle: Driver enters shift / stages at taxi stand
+    
+    note right of Cruising_Idle
+        State: IDLE / CRUISING
+        Intervention: Dynamic fleet repositioning
+        Gap: Telemetry unobserved in trip records
+    end note
+
+    Cruising_Idle --> Meter_Engaged: Passenger hailed / meter dropped
+    
+    note right of Meter_Engaged
+        State: TRIP_STARTED
+        Captured: tpep_pickup_datetime, PULocationID
+        Tariff: Base flag drop + MTA congestion surcharge
+    end note
+
+    Meter_Engaged --> In_Transit: Vehicle navigates road network
+    
+    note right of In_Transit
+        State: IN_TRANSIT
+        Operational Impact: Manhattan traffic congestion
+        Metric: Effective transit speed (mph)
+    end note
+
+    In_Transit --> Meter_Stopped: Destination reached
+    
+    note right of Meter_Stopped
+        State: TRIP_COMPLETED
+        Captured: tpep_dropoff_datetime, DOLocationID, trip_distance
+        Duration: duration_seconds
+    end note
+
+    Meter_Stopped --> Payment_Settled: Fare computed & paid
+    
+    note right of Payment_Settled
+        State: FARE_SETTLED
+        Captured: fare_amount, tip_amount, tolls, total_amount
+        Payment: Credit Card (tip recorded) vs Cash (tip unobserved)
+    end note
+
+    Payment_Settled --> Cruising_Idle: Driver ready for next passenger
+    Payment_Settled --> [*]: Driver ends shift
