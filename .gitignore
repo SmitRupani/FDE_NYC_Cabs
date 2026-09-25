@@ -25,3 +25,5 @@ Thumbs.db
 /test_*.py
 /inspect_*.py
 /profile_data.py
+logs/*.log
+logs/
