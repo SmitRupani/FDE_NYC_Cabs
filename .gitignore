@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+env/
+venv/
+*.egg-info/
+.pytest_cache/
+
+# Large Data Files (preserve local, avoid GitHub 100MB hard limit)
+*.parquet
+*.parquet.tmp
+data/raw/*.parquet
+data/processed/*.parquet
+data/quarantine/*.parquet
+
+# OS & IDE
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Scratch & root test scripts
+/test_*.py
+/inspect_*.py
+/profile_data.py
