@@ -1,0 +1,35 @@
+graph TD
+    subgraph S1["Raw Ingestion & Multi-Mode Retrieval (Class 5)"]
+        A1["TLC Yellow Trip Records<br/>(Parquet File: 3.72M Rows)"] -->|SHA-256 Checksum| R1["DataRetriever"]
+        A2["TLC Taxi Zone Lookup<br/>(HTTP REST API: 265 Zones)"] -->|HTTP GET / Retries| R1
+        R1 -->|Preserve Raw Inputs| RAW["data/raw/"]
+        RAW --> DUCK["Embedded DuckDB In-Memory Session"]
+    end
+
+    subgraph S2["Validation & Anomaly Quarantine (Class 6)"]
+        DUCK --> VAL["DataValidator Engine"]
+        VAL -->|10 Business Rules Check| DEC{Meets Quality Rules?}
+        DEC -->|Violates Rules: 7.02%| QUA["Quarantine Storage<br/>data/quarantine/quarantined_trips.parquet"]
+        DEC -->|Compliant: 92.98%| CLN["clean_trips View<br/>(3.46M records)"]
+        VAL --> AUDIT["Data Quality Audit Report<br/>data/outputs/validation_audit_report.json"]
+    end
+
+    subgraph S3["Relational Star Schema Modeling (Class 7)"]
+        CLN --> MOD["DataTransformer"]
+        MOD --> DZ["dim_zones"]
+        MOD --> DV["dim_vendors"]
+        MOD --> DR["dim_rate_codes"]
+        MOD --> DP["dim_payment_types"]
+        MOD --> FT["fct_trips<br/>(Duration, Speed, Rev/Min, Airport Flags)"]
+        DZ & DV & DR & DP & FT --> PROC["data/processed/*.parquet"]
+    end
+
+    subgraph S4["Operational KPIs & Evidence Dashboard (Class 7 & 8)"]
+        FT --> MET["MetricCalculator"]
+        MET --> M1["Metric 1: Congestion & Speed Index"]
+        MET --> M2["Metric 2: Driver Revenue Productivity"]
+        MET --> M3["Metric 3: Zone Flow Imbalance"]
+        MET --> M4["Metric 4: Airport Corridor Performance"]
+        MET --> M5["Metric 5: Hardware Vendor Telemetry Trust"]
+        M1 & M2 & M3 & M4 & M5 --> DASH["Interactive HTML Dashboard & CSVs<br/>data/outputs/dashboard.html"]
+    end
