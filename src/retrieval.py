@@ -23,6 +23,7 @@ from src.config import (
     RAW_DATA_DIR,
     TLC_ZONE_LOOKUP_URL,
     TLC_ZONE_LOOKUP_FILENAME,
+    TLC_TRIP_DATA_BASE_URL,
     DEFAULT_RAW_PARQUET_FILENAME,
     BASE_DIR
 )
@@ -111,14 +112,42 @@ class DataRetriever:
         """
         destination_path = self.raw_dir / filename
 
-        # If not in data/raw yet, check workspace root and preserve it into data/raw
+        # If not in data/raw yet, check workspace root, or retrieve from remote TLC CloudFront CDN
         if not destination_path.exists():
             root_candidate = BASE_DIR / filename
             if root_candidate.exists():
                 logger.info(f"Preserving raw parquet file from root to {destination_path}...")
                 shutil.copy2(root_candidate, destination_path)
             else:
-                raise FileNotFoundError(f"Raw parquet file not found at {destination_path} or {root_candidate}")
+                remote_url = f"{TLC_TRIP_DATA_BASE_URL}/{filename}"
+                logger.info(f"Raw parquet not found locally. Retrieving via HTTP GET from: {remote_url}")
+                try:
+                    with requests.get(remote_url, stream=True, timeout=60) as r:
+                        if r.status_code == 404:
+                            raise FileNotFoundError(
+                                f"Trip data file '{filename}' was not found locally in {destination_path} "
+                                f"and does not exist on remote NYC TLC CloudFront CDN ({remote_url})."
+                            )
+                        r.raise_for_status()
+                        total_bytes = int(r.headers.get("content-length", 0))
+                        downloaded = 0
+                        temp_dest = destination_path.with_suffix(".parquet.part")
+                        with open(temp_dest, "wb") as f:
+                            for chunk in r.iter_content(chunk_size=1024 * 1024):
+                                if chunk:
+                                    f.write(chunk)
+                                    downloaded += len(chunk)
+                                    if total_bytes > 0 and (downloaded % (10 * 1024 * 1024) < 1024 * 1024):
+                                        pct = round((downloaded / total_bytes) * 100, 1)
+                                        logger.info(f"Downloading {filename}: {downloaded / 1024 / 1024:.1f} MB / {total_bytes / 1024 / 1024:.1f} MB ({pct}%)")
+                        temp_dest.replace(destination_path)
+                        logger.info(f"Successfully retrieved and preserved raw parquet file to {destination_path} ({destination_path.stat().st_size / 1024 / 1024:.1f} MB)")
+                except Exception as e:
+                    temp_part = destination_path.with_suffix(".parquet.part")
+                    if temp_part.exists():
+                        temp_part.unlink(missing_ok=True)
+                    logger.error(f"Failed to retrieve trips parquet from {remote_url}: {e}")
+                    raise
 
         # Verify Parquet completeness and metadata
         parquet_file = pq.ParquetFile(destination_path)

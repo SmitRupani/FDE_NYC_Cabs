@@ -809,4 +809,8 @@ def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
 
 
 if __name__ == "__main__":
-    generate_html_dashboard()
+    import argparse
+    parser = argparse.ArgumentParser(description="NYC TLC Evidence Dashboard Generator")
+    parser.add_argument("--month", type=str, default=DEFAULT_YEAR_MONTH, help="Target month format YYYY-MM")
+    args = parser.parse_args()
+    generate_html_dashboard(args.month)

@@ -152,6 +152,19 @@ class TLCPipeline:
                 "exported_metrics": {k: str(v) for k, v in exported_metrics.items()}
             }
 
+            # -------------------------------------------------------------
+            # Stage 5: Visual Evidence Dashboard Generation
+            # -------------------------------------------------------------
+            try:
+                from generate_dashboard import generate_html_dashboard
+                dashboard_path = generate_html_dashboard(self.target_month)
+                execution_manifest["stages"]["dashboard"] = {
+                    "file": str(dashboard_path)
+                }
+                logger.info(f">>> STAGE 5: EVIDENCE DASHBOARD GENERATED -> {dashboard_path}")
+            except Exception as dash_err:
+                logger.warning(f"Could not generate evidence dashboard: {dash_err}")
+
             total_elapsed = round(time.time() - start_time, 2)
             execution_manifest["status"] = "SUCCESS"
             execution_manifest["total_duration_seconds"] = total_elapsed

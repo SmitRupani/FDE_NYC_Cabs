@@ -21,6 +21,7 @@ for directory in [DATA_DIR, RAW_DATA_DIR, PROCESSED_DATA_DIR, QUARANTINE_DATA_DI
 # Remote Data Sources
 TLC_ZONE_LOOKUP_URL = "https://d37ci6vzurychx.cloudfront.net/misc/taxi_zone_lookup.csv"
 TLC_ZONE_LOOKUP_FILENAME = "taxi_zone_lookup.csv"
+TLC_TRIP_DATA_BASE_URL = "https://d37ci6vzurychx.cloudfront.net/trip-data"
 
 # Target Processing Month
 DEFAULT_YEAR_MONTH = "2026-01"
