@@ -14,7 +14,21 @@ sys.path.insert(0, str(Path(__file__).resolve().parent))
 from src.config import OUTPUTS_DIR, DEFAULT_YEAR_MONTH
 
 
-def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
+def get_latest_processed_month() -> str:
+    """Finds the most recently modified month's output files in data/outputs/."""
+    kpi_files = sorted(OUTPUTS_DIR.glob("executive_summary_kpis_*.csv"), key=lambda p: p.stat().st_mtime, reverse=True)
+    if kpi_files:
+        stem = kpi_files[0].stem
+        parts = stem.replace("executive_summary_kpis_", "").split("_")
+        if len(parts) >= 2:
+            return f"{parts[0]}-{parts[1]}"
+    return DEFAULT_YEAR_MONTH
+
+
+def generate_html_dashboard(month: str = None):
+    if not month:
+        month = get_latest_processed_month()
+        
     month_suffix = month.replace("-", "_")
     
     # Load outputs
@@ -25,6 +39,12 @@ def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
     airport_csv = OUTPUTS_DIR / f"metric_4_airport_corridor_{month_suffix}.csv"
     trust_csv = OUTPUTS_DIR / f"metric_5_data_trust_vendor_{month_suffix}.csv"
     audit_json = OUTPUTS_DIR / f"validation_audit_report_{month_suffix}.json"
+
+    if not exec_csv.exists() or not audit_json.exists():
+        raise FileNotFoundError(
+            f"Pipeline output files for month '{month}' not found in {OUTPUTS_DIR}. "
+            f"Please run 'python run_pipeline.py --month {month}' first."
+        )
 
     df_exec = pd.read_csv(exec_csv)
     df_speed = pd.read_csv(speed_csv)
@@ -46,6 +66,52 @@ def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
     mta_surcharge = float(kpi["total_mta_congestion_surcharge_collected"])
     quarantine_pct = audit_data["quarantine_rate_pct"]
     clean_pct = audit_data["clean_rate_pct"]
+
+    # Dynamic data for Speed Chart (Metric 1)
+    def get_speed_series(borough_name):
+        b_df = df_speed[df_speed["pickup_borough"] == borough_name]
+        speeds = []
+        for tw in ['Morning Rush (07-10)', 'Midday (10-16)', 'Evening Rush (16-20)', 'Night / Off-Peak']:
+            val = b_df[b_df["time_window"] == tw]["median_speed_mph"].values
+            speeds.append(round(float(val[0]), 2) if len(val) > 0 else 0.0)
+        return speeds
+
+    manhattan_speeds = get_speed_series("Manhattan")
+    queens_speeds = get_speed_series("Queens")
+    brooklyn_speeds = get_speed_series("Brooklyn")
+
+    # Dynamic data for Quarantine Chart (Metric 5 & Class 6)
+    violations_dict = audit_data.get("violations_by_rule", {})
+    label_map = {
+        "DISTANCE_UNDER_MIN": "Zero/Neg Dist",
+        "DURATION_UNDER_1MIN": "<1-Min Duration",
+        "NON_POSITIVE_FARE": "Refund/Zero Fare",
+        "UNKNOWN_OR_OUT_OF_BOUNDS_LOCATION": "Unknown Zone",
+        "SPEED_OVER_85MPH": "Speed >85mph",
+        "OUT_OF_PERIOD": "Out of Period",
+        "NEGATIVE_DURATION": "Negative Dur",
+        "DURATION_OVER_24H": "Duration >24h",
+        "DISTANCE_OVER_150MI": "Dist >150mi",
+        "FARE_OVER_1500": "Fare >$1,500"
+    }
+    q_labels = [label_map.get(k, k) for k in violations_dict.keys()]
+    q_values = [int(v) for v in violations_dict.values()]
+
+    # Dynamic data for Revenue Productivity Chart (Metric 2)
+    def get_rev_series(is_weekend_val):
+        w_df = df_rev[df_rev["is_weekend"].astype(str).str.lower() == str(is_weekend_val).lower()]
+        revs = []
+        for tw in ['Morning Rush (07-10)', 'Midday (10-16)', 'Evening Rush (16-20)', 'Night / Off-Peak']:
+            sub = w_df[w_df["time_window"] == tw]
+            if len(sub) > 0 and sub["trip_count"].sum() > 0:
+                weighted_avg = (sub["avg_revenue_per_active_min"] * sub["trip_count"]).sum() / sub["trip_count"].sum()
+                revs.append(round(float(weighted_avg), 2))
+            else:
+                revs.append(0.0)
+        return revs
+
+    weekday_rev = get_rev_series(False)
+    weekend_rev = get_rev_series(True)
 
     # Prepare Top 10 flow zones
     top_sources = df_flow[df_flow["net_passenger_flow"] > 0].head(5).to_dict(orient="records")
@@ -423,7 +489,7 @@ def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
         <div class="kpi-card kpi-rose">
             <div class="kpi-title">Data Quarantine Rate</div>
             <div class="kpi-value">{quarantine_pct}%</div>
-            <div class="kpi-subtext">261,438 records segregated with audit tags</div>
+            <div class="kpi-subtext">{audit_data['quarantined_records']:,} records segregated with audit tags</div>
         </div>
     </section>
 
@@ -628,7 +694,7 @@ def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
                 <h3 style="color:#34D399;">Known Facts</h3>
                 <ul>
                     <li><strong>Source Grain:</strong> Exactly 1 record per completed taxi trip (meter engage to meter stop).</li>
-                    <li><strong>Verified Records:</strong> 3,724,889 raw trips ingested; 3,463,451 (92.98%) verified compliant.</li>
+                    <li><strong>Verified Records:</strong> {total_trips:,} clean trips ({clean_pct}%) verified compliant and promoted to fact table; {audit_data['quarantined_records']:,} ({quarantine_pct}%) quarantined.</li>
                     <li><strong>Geography:</strong> NYC TLC official GIS lookup maps 263 valid taxi zones across 5 boroughs + EWR.</li>
                     <li><strong>Regulatory Fees:</strong> Explicit columns capture MTA congestion surcharge, airport access fee, and CBD congestion fee.</li>
                 </ul>
@@ -647,7 +713,7 @@ def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
             <div class="framework-box" style="border-top:3px solid var(--accent-blue);">
                 <h3 style="color:#60A5FA;">FDE Assumptions</h3>
                 <ul>
-                    <li><strong>Null Passenger Counts (29.2%):</strong> Retained in operational/revenue metrics; omitting them would artificially underreport NYC transit volume by 1.088M trips.</li>
+                    <li><strong>Missing Passenger / Rate Codes:</strong> Retained in operational/revenue metrics; omitting them would artificially underreport NYC transit volume and economic activity.</li>
                     <li><strong>Duration Floor (60s):</strong> Trips under 60s are classified as meter mistakes or immediate cancellations.</li>
                     <li><strong>Speed Ceiling (85 mph):</strong> Calculated effective speeds above 85 mph represent corrupted GPS or timing logs.</li>
                     <li><strong>Rate Code 99:</strong> Mapped to 'Special / Digital Dispatch' rather than quarantined.</li>
@@ -681,21 +747,21 @@ def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
             datasets: [
                 {{
                     label: 'Manhattan Median Speed (mph)',
-                    data: [8.8, 8.4, 8.1, 11.2],
+                    data: {manhattan_speeds},
                     backgroundColor: 'rgba(244, 63, 94, 0.7)',
                     borderColor: '#F43F5E',
                     borderWidth: 1
                 }},
                 {{
                     label: 'Queens Median Speed (mph)',
-                    data: [21.4, 20.8, 19.5, 24.2],
+                    data: {queens_speeds},
                     backgroundColor: 'rgba(59, 130, 246, 0.7)',
                     borderColor: '#3B82F6',
                     borderWidth: 1
                 }},
                 {{
                     label: 'Brooklyn Median Speed (mph)',
-                    data: [13.2, 12.8, 12.1, 15.6],
+                    data: {brooklyn_speeds},
                     backgroundColor: 'rgba(16, 185, 129, 0.7)',
                     borderColor: '#10B981',
                     borderWidth: 1
@@ -727,16 +793,20 @@ def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
     new Chart(ctxQ, {{
         type: 'doughnut',
         data: {{
-            labels: ['Zero/Neg Distance', 'Under 1-Min Duration', 'Negative/Zero Fare', 'Unknown Zone', 'Speed > 85mph', 'Other'],
+            labels: {json.dumps(q_labels)},
             datasets: [{{
-                data: [153532, 83747, 40435, 25251, 447, 163],
+                data: {q_values},
                 backgroundColor: [
                     '#F43F5E',
                     '#F59E0B',
                     '#8B5CF6',
                     '#06B6D4',
                     '#EC4899',
-                    '#64748B'
+                    '#10B981',
+                    '#64748B',
+                    '#3B82F6',
+                    '#6366F1',
+                    '#D946EF'
                 ],
                 borderWidth: 0
             }}]
@@ -759,7 +829,7 @@ def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
             datasets: [
                 {{
                     label: 'Weekday Revenue Productivity ($/active min)',
-                    data: [2.15, 1.95, 2.05, 2.22],
+                    data: {weekday_rev},
                     borderColor: '#10B981',
                     backgroundColor: 'rgba(16, 185, 129, 0.1)',
                     tension: 0.3,
@@ -767,7 +837,7 @@ def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
                 }},
                 {{
                     label: 'Weekend Revenue Productivity ($/active min)',
-                    data: [1.88, 1.92, 2.02, 2.31],
+                    data: {weekend_rev},
                     borderColor: '#A78BFA',
                     backgroundColor: 'rgba(167, 139, 250, 0.1)',
                     tension: 0.3,
@@ -801,16 +871,19 @@ def generate_html_dashboard(month: str = DEFAULT_YEAR_MONTH):
 """
 
     out_file = OUTPUTS_DIR / "dashboard.html"
+    month_file = OUTPUTS_DIR / f"dashboard_{month_suffix}.html"
     with open(out_file, "w", encoding="utf-8") as f:
         f.write(html_content)
+    with open(month_file, "w", encoding="utf-8") as f:
+        f.write(html_content)
     
-    print(f"Evidence dashboard generated at: {out_file}")
+    print(f"Evidence dashboard for {month} generated at: {out_file} (and {month_file})")
     return out_file
 
 
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description="NYC TLC Evidence Dashboard Generator")
-    parser.add_argument("--month", type=str, default=DEFAULT_YEAR_MONTH, help="Target month format YYYY-MM")
+    parser.add_argument("--month", type=str, default=None, help="Target month format YYYY-MM (defaults to most recently processed month)")
     args = parser.parse_args()
     generate_html_dashboard(args.month)
