@@ -45,11 +45,17 @@ class DataValidator:
         """
         logger.info(f"Initiating data validation for period: {target_month}...")
 
-        # Parse target year and month boundaries
-        year, month = target_month.split("-")
-        next_month = f"{year}-02-01" if month == "01" else f"{year}-{int(month)+1:02d}-01"
-        start_date = f"{target_month}-01 00:00:00"
-        end_date = f"{next_month} 00:00:00"
+        # Parse target year and month boundaries (correctly handling December rollover)
+        year_int, month_int = map(int, target_month.split("-"))
+        if month_int == 12:
+            next_year = year_int + 1
+            next_month = 1
+        else:
+            next_year = year_int
+            next_month = month_int + 1
+
+        start_date = f"{year_int:04d}-{month_int:02d}-01 00:00:00"
+        end_date = f"{next_year:04d}-{next_month:02d}-01 00:00:00"
 
         min_dur = self.rules["min_duration_seconds"]
         max_dur = self.rules["max_duration_seconds"]
